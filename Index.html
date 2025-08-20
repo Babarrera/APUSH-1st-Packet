@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APUSH Review</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f7f9;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .period-nav {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+        
+        .period-btn {
+            padding: 0.8rem 1.5rem;
+            background-color: #3949ab;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .period-btn:hover {
+            background-color: #283593;
+            transform: translateY(-2px);
+        }
+        
+        .period-btn.active {
+            background-color: #1a237e;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .content-section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #3949ab;
+        }
+        
+        .content-section h2 {
+            color: #1a237e;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #e8eaf6;
+        }
+        
+        .content-section h3 {
+            color: #283593;
+            margin: 1.5rem 0 1rem 0;
+        }
+        
+        ul {
+            list-style-type: none;
+            padding-left: 1.5rem;
+        }
+        
+        ul li {
+            margin-bottom: 0.8rem;
+            position: relative;
+        }
+        
+        ul li:before {
+            content: "·";
+            position: absolute;
+            left: -1rem;
+            font-weight: bold;
+        }
+        
+        .nested-list {
+            padding-left: 2rem;
+            margin-top: 0.5rem;
+        }
+        
+        .nested-list li:before {
+            content: "◦";
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            box-shadow: 0 2px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #e8eaf6;
+            color: #1a237e;
+            font-weight: 600;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9fc;
+        }
+        
+        .topic-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        .topic-table th, .topic-table td {
+            border: 1px solid #1a237e;
+            padding: 1rem;
+            vertical-align: top;
+        }
+        
+        .topic-table th {
+            background-color: #1a237e;
+            color: white;
+            text-align: center;
+        }
+        
+        .key-point {
+            background-color: #e8eaf6;
+            padding: 1rem;
+            border-radius: 4px;
+            margin: 1rem 0;
+            border-left: 4px solid #3949ab;
+        }
+        
+        .key-point h4 {
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+        }
+        
+        .timeline-event {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px dashed #ccc;
+        }
+        
+        .timeline-event:last-child {
+            border-bottom: none;
+        }
+        
+        .event-date {
+            font-weight: 700;
+            color: #1a237e;
+            margin-bottom: 0.5rem;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            background-color: #1a237e;
+            color: white;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .content-section {
+                padding: 1.5rem;
+            }
+            
+            .period-btn {
+                padding: 0.6rem 1rem;
+                font-size: 0.9rem;
+            }
+            
+            table, .topic-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>APUSH Review</h1>
+        <p class="subtitle">Complete Study Guide for AP U.S. History</p>
+    </header>
+    
+    <div class="container">
+        <div class="period-nav">
+            <button class="period-btn active" onclick="showPeriod('period1')">Period 1: 1491-1607</button>
+            <button class="period-btn" onclick="showPeriod('period2')">Period 2: 1607-1754</button>
+            <button class="period-btn" onclick="showPeriod('americanPageant')">American Pageant</button>
+            <button class="period-btn" onclick="showPeriod('unit1')">Unit 1 Summary</button>
+        </div>
+        
+        <!-- PERIOD 1 CONTENT -->
+        <div id="period1" class="period-content">
+            <div class="content-section">
+                <h2>Period 1: 1491-1607</h2>
+                <p><strong>What are the 3cs this period covers?</strong> Contact, Commerce, Competing philosophies.</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>1. Native Societies Before European Contact</h3>
+                <ul>
+                    <li><strong>Description:</strong> Diverse, complex, and adapted to their environments.
+                        <ul class="nested-list">
+                            <li><strong>Examples:</strong>
+                                <ul class="nested-list">
+                                    <li><strong>Aztecs:</strong> Urban (Tenochtitlan), centralized government, tribute systems.</li>
+                                    <li><strong>Pueblos:</strong> Agricultural (maize), cliff dwellings, Southwest.</li>
+                                    <li><strong>Eastern Woodlands:</strong> Matrilineal (Iroquois), hunter-gatherer & farming mix.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                    <li><strong>Key Point:</strong> Societies were not static—they evolved over time (e.g., Cahokia's decline pre-1492).</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>2. Major Effect of Columbus's Voyage (1492)</h3>
+                <ul>
+                    <li><strong>Cause and Effect:</strong>
+                        <ul class="nested-list">
+                            <li>Triggered the Columbian Exchange → global transfer of goods, people, diseases.</li>
+                            <li><strong>Effect:</strong> Demographic catastrophe for Natives (disease), rise of transatlantic slavery, European dominance.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>3. Columbian Exchange Facts (3Cs)</h3>
+                <table>
+                    <tr>
+                        <th>Category</th>
+                        <th>Continuity & Change</th>
+                        <th>Compare & Contrast</th>
+                        <th>Cause & Effect</th>
+                    </tr>
+                    <tr>
+                        <td>Animals</td>
+                        <td>Natives had no horses; post-contact, Plains tribes adopted them for hunting/warfare.</td>
+                        <td>Old World (horses, cows) vs. New World (llamas, turkeys).</td>
+                        <td>Horses → transformed Native mobility/power.</td>
+                    </tr>
+                    <tr>
+                        <td>Plants</td>
+                        <td>Corn/potatoes → European population boom.</td>
+                        <td>Old World (wheat) vs. New World (tobacco).</td>
+                        <td>Cash crops (tobacco) fueled plantation economies.</td>
+                    </tr>
+                    <tr>
+                        <td>Microbes</td>
+                        <td>Natives had no immunity → 80% population decline.</td>
+                        <td>Smallpox (Old World) vs. syphilis (New World).</td>
+                        <td>Demographic collapse → labor replaced by enslaved Africans.</td>
+                    </tr>
+                    <tr>
+                        <td>People</td>
+                        <td>Europeans/Africans migrated; Natives displaced.</td>
+                        <td>Voluntary (Europeans) vs. forced (Africans) migration.</td>
+                        <td>Slavery → racial caste systems in colonies.</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="content-section">
+                <h3>4. "Competing Philosophies"</h3>
+                <ul>
+                    <li><strong>What?:</strong> Ideological clashes over colonization:
+                        <ul class="nested-list">
+                            <li><strong>Doctrine of Discovery (1493):</strong> Europeans claimed land by "divine right."</li>
+                            <li><strong>Bartolomé de las Casas:</strong> Argued Natives had souls; opposed brutality.</li>
+                            <li><strong>Religious Rivalry:</strong> Catholics (Spain) vs. Protestants (England) for souls/territory.</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>5. Skill Focus: Multiple Choice</h3>
+                <ul>
+                    <li><strong>Correct Answer:</strong> B (Growing dependence on indentured servants until 1700, then African slavery).</li>
+                    <li><strong>3 Tips for Multiple Choice:</strong>
+                        <ol>
+                            <li>Analyze visuals first (graphs, maps) → identify trends.</li>
+                            <li>Eliminate absolutes (e.g., "exclusive" in option D).</li>
+                            <li>Context over dates → Focus on why events happened, not just when.</li>
+                        </ol>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>Key Takeaways for Period 1</h3>
+                <ol>
+                    <li>Natives were diverse; Columbian Exchange changed everything.</li>
+                    <li>Competing philosophies shaped colonization (religion, labor, land).</li>
+                    <li>Multiple-choice tests interpretation—practice with visuals!</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- PERIOD 2 CONTENT -->
+        <div id="period2" class="period-content" style="display: none;">
+            <div class="content-section">
+                <h2>Period 2: 1607-1754</h2>
+                <p><strong>What are the 3 G's?</strong> Gold God Glory</p>
+            </div>
+            
+            <div class="content-section">
+                <h3>Where are different European colonies in the New World?</h3>
+                <table>
+                    <tr>
+                        <th>Country</th>
+                        <th>Where?</th>
+                        <th>Why? (Motivation)</th>
+                        <th>How? (Labor Systems)</th>
+                    </tr>
+                    <tr>
+                        <td>England</td>
+                        <td>Massachusetts to Virginia</td>
+                        <td>A new permanent home for religious dissenters; money</td>
+                        <td>Indentured servitude (Middle/North); Plantations and slavery (South)</td>
+                    </tr>
+                    <tr>
+                        <td>Spain</td>
+                        <td>Much of California and the Southwest</td>
+                        <td>Gold; religious conversion (God)</td>
+                        <td>Encomienda system; missions</td>
+                    </tr>
+                    <tr>
+                        <td>France</td>
+                        <td>Louisiana and Canada (trading hubs)</td>
+                        <td>Trapping and trading (money)</td>
+                        <td>Trapping and export companies with Indian assistance</td>
+                    </tr>
+                    <tr>
+                        <td>The Dutch</td>
+                        <td>New Amsterdam (modern-day New York)</td>
+                        <td>Mercantilism (distribution of trade of goods and services for money)</td>
+                        <td>(Not specifically detailed in transcript)</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="content-section">
+                <h3>Was religion important to early colonists? Give examples of why or why not?</h3>
+                <p>Yes, religion was very important. The transcript states it was "one of the most constant and important things for many of these peoples" and that it "dictated their decisions."</p>
+                <ul>
+                    <li><strong>Why it was important:</strong> Many colonists came to "freely practice their chosen religion without the fear of persecution." Their religious beliefs also provided a framework for understanding the world, such as blaming livestock death or child mortality on Satan or an "angry god" rather than disease.</li>
+                    <li><strong>Examples of its importance:</strong> The Salem Witch Trials and the religious revival known as the Great Awakening are given as examples of how religious fear and fervor manifested in the colonies.</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>What role does glory play in the early colonies? How does it lead to conflict?</h3>
+                <p>Glory played a role as a motivator for different groups.</p>
+                <ul>
+                    <li><strong>Role:</strong> For monarchs, glory meant ensuring a legacy as a powerful ruler with "vast holdings around the world." For colonists, like the Puritans, it meant the glory of "creating a self-sustaining community" based on their doctrine.</li>
+                    <li><strong>Conflict:</strong> The conflict arose from "how the glory would be achieved and at what cost." Specifically, as colonies became profitable, imperial rulers in Europe wanted greater control for their own glory and profit, while colonists began to resent this interference from "absentee rulers." This clash of interests planted the seeds for future conflict.</li>
+                </ul>
+            </div>
+            
+            <div class="content-section">
+                <h3>List the 7 historical themes.</h3>
+                <ol>
+                    <li>Identity</li>
+                    <li>Work, exchange, and technology</li>
+                    <li>Peopling</li>
+                    <li>Politics and power</li>
+                    <li>America and the world</li>
+                    <li>Environment and geography</li>
+                    <li>Ideas, belief, and culture</li>
+                </ol>
+            </div>
+            
+            <div class="content-section">
+                <h3>What are three important "take aways" from the short answer section of the test?</h3>
+                <ol>
+                    <li>They account for 20% of the exam score.</li>
+                    <li>You must answer all parts (A, B, and C) of the question completely; it is not enough to just answer one part.</li>
+                    <li>There is no single correct answer for some questions; your task is to choose an option and then skillfully support your argument with concrete historical evidence.</li>
+                </ol>
+            </div>
+            
+            <div class="content-section">
+                <h3>Review Period 2 time-line.</h3>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1607 – Jamestown, Virginia, Founded</div>
+                    <p><strong>What happened?</strong> The first permanent English settlement was established by the Virginia Company. Colonists initially sought gold but faced disease, starvation, and conflict with Native Americans.</p>
+                    <p><strong>Impact:</strong> Jamestown became the foundation of English America. The introduction of tobacco (1612) saved the colony economically but led to reliance on indentured servants and later enslaved Africans.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1619 – Africans in the New World (Jamestown)</div>
+                    <p><strong>What happened?</strong> A Dutch ship brought the first recorded Africans to English North America. Their status (enslaved or indentured) remains debated.</p>
+                    <p><strong>Impact:</strong> Marked the beginning of African presence in British colonies, setting the stage for race-based slavery and the plantation system in the South.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1620 – Pilgrims Land (Mayflower Compact)</div>
+                    <p><strong>What happened?</strong> Puritan Separatists (Pilgrims) arrived in Plymouth and signed the Mayflower Compact, agreeing to self-government.</p>
+                    <p><strong>Impact:</strong> Established an early model for democratic governance and inspired later colonial contracts. Reinforced the idea of religious migration to America.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1626–1664 – New Amsterdam</div>
+                    <p><strong>What happened?</strong> The Dutch founded New Amsterdam (later New York) as a trading hub. It was a diverse, tolerant society until England seized it in 1664.</p>
+                    <p><strong>Impact:</strong> The English takeover expanded their control of the Atlantic coast. Dutch legacy influenced American commerce and multiculturalism.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1630 – Boston: The City on the Hill</div>
+                    <p><strong>What happened?</strong> Puritans, led by John Winthrop, established Massachusetts Bay Colony to create a pious "model of Christian charity."</p>
+                    <p><strong>Impact:</strong> Defined New England's religious and political identity, but strict orthodoxy led to dissent (e.g., Anne Hutchinson).</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1637 – Anne Hutchinson Banished</div>
+                    <p><strong>What happened?</strong> Hutchinson challenged Puritan leaders by holding religious meetings and claiming direct divine revelation. She was tried and exiled.</p>
+                    <p><strong>Impact:</strong> Highlighted Puritan intolerance, pushing some toward religious freedom (e.g., Rhode Island). Showed tensions between authority and individualism.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1662 – The Half-Way Covenant</div>
+                    <p><strong>What happened?</strong> Puritan churches allowed partial membership for unconverted children of members to maintain influence.</p>
+                    <p><strong>Impact:</strong> Revealed declining religious fervor in New England and adapted Puritanism to retain congregational power.</p>
+                </div>
+                
+                <div class="timeline-event">
+                    <div class="event-date">1675–1676 – King Philip's War</div>
+                    <p><strong>What happened?</strong> Wampanoag leader Metacomet ("King Philip") led a war against colonists encroaching on Native land.</p>
+                    <p><strong>Impact:</strong> Deadliest war per capita in U.S. history. Broke Native resistance in New England, accelerating English expansion.</p>
+                </div>
+                
+                <div class="key-point">
+                    <h4>Why These Events?</h4>
+                    <ul>
+                        <li><strong>Colonial Foundations:</strong> Jamestown (1607) and Plymouth (1620) show early struggles and governance models.</li>
+                        <li><strong>Slavery's Start:</strong> 1619 Africans foreshadowed racial slavery's expansion.</li>
+                        <li><strong>Religious Conflict:</strong> Puritan ideals (1630) vs. dissent (Hutchinson) shaped American identity.</li>
+                        <li><strong>Native-Colonial Wars:</strong> King Philip's War (1675) reshaped power dynamics.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        <!-- AMERICAN PAGEANT CONTENT -->
+        <div id="americanPageant" class="period-content" style="display: none;">
+            <div class="content-section">
+                <h2>American Pageant Chapter 1 APUSH Review (Period 1)</h2>
+                
+                <table class="topic-table">
+                    <tr>
+                        <th>Topic</th>
+                        <th>Summary/Evidence/Names</th>
+                    </tr>
+                    <tr>
+                        <td>Native Americans Pre-Contact</td>
+                        <td>
+                            <strong>Summary:</strong> People migrated via the Bering Strait over 10,000 years before Columbus. They developed diverse and complex societies.<br>
+                            <strong>Evidence:</strong> Adapted to and transformed their environments. Relied on trade with nearby tribes.<br>
+                            <strong>Names:</strong> Bering Strait, diverse tribes (Pueblo, Sioux, Iroquois).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Native American Culture</td>
+                        <td>
+                            <strong>Summary:</strong> Extremely diverse cultures were shaped by their environments and interactions. A common thread was a spiritual connection to nature.<br>
+                            <strong>Evidence:</strong> Animism (belief that non-human things possess a spiritual essence). Southwest Pueblos used irrigation for maize. Great Plains tribes were nomadic, following bison. Northeast tribes had mixed economies and permanent villages.<br>
+                            <strong>Names:</strong> Animism, Pueblo (maize cultivation), Lakota Sioux (nomadic, bison), Iroquois Confederacy.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Colonization of the "NEW World"</td>
+                        <td>
+                            <strong>Summary:</strong> European exploration and conquest was driven by a combination of economic, political, and religious factors.<br>
+                            <strong>Evidence:</strong> The "3 G's" (Gold: wealth, Glory: power, God: conversion). Mercantilism (economic theory that colonies exist to enrich the mother country).<br>
+                            <strong>Names:</strong> Christopher Columbus (1492), Columbian Exchange.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Early Colonization Spain & Portugal</td>
+                        <td>
+                            <strong>Summary:</strong> The first European colonizers, they focused on extracting wealth and converting native populations, creating rigid social hierarchies.<br>
+                            <strong>Evidence:</strong> Treaty of Tordesillas (1494) divided the New World. St. Augustine (1565) was the first permanent US settlement. Encomienda system was a form of forced Native labor.<br>
+                            <strong>Names:</strong> Spain, Portugal, Pope Alexander VI, St. Augustine, Encomienda.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Pueblo Revolt</td>
+                        <td>
+                            <strong>Summary:</strong> A successful, organized rebellion of Pueblo people against Spanish colonization and religious persecution.<br>
+                            <strong>Evidence:</strong> Revolt in 1680 led to the death of hundreds of Spanish colonists and the destruction of Catholic churches. It expelled the Spanish from New Mexico for over a decade.<br>
+                            <strong>Names:</strong> Popé (Pueblo leader), Pueblo Revolt of 1680.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Debating Colonization</td>
+                        <td>
+                            <strong>Summary:</strong> A moral and political debate occurred within Spain itself regarding the treatment of Native Americans.<br>
+                            <strong>Evidence:</strong> Juan de Sepúlveda argued that Natives were "natural slaves" and conquest was justified. Bartolomé de las Casas condemned the brutality of the encomienda system and advocated for Native rights.<br>
+                            <strong>Names:</strong> Sepúlveda (Just Causes for War), de las Casas (A Short Account of the Destruction of the Indies).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Comparing Colonization</td>
+                        <td>
+                            <strong>Summary:</strong> Different European powers had distinct models for colonization based on their primary goals.<br>
+                            <strong>Evidence:</strong> Spain: Extraction (gold/silver), conversion, encomienda. France/Dutch: Trade (fur), alliances, intermarriage. England: Agricultural settlement, displacement of natives, less mixing.<br>
+                            <strong>Names:</strong> Spain, France, Holland (Dutch), England.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+        
+        <!-- UNIT 1 SUMMARY CONTENT -->
+        <div id="unit1" class="period-content" style="display: none;">
+            <div class="content-section">
+                <h2>APUSH Unit 1 Review (Period 1: 1491-1607)</h2>
+                <h3>APUSH Unit 1 (1491-1607) - Summary</h3>
+                
+                <div class="key-point">
+                    <h4>1. Native American Societies (Pre-1491)</h4>
+                    <ul>
+                        <li><strong>Diverse & Adapted to Environment:</strong>
+                            <ul class="nested-list">
+                                <li><strong>Pueblo:</strong> SW farmers (maize), irrigation, cliff dwellings.</li>
+                                <li><strong>Great Plains/Basin:</strong> Nomadic hunter-gatherers (Ute).</li>
+                                <li><strong>Pacific Coast:</strong> Settled villages (Chumash, Chinook), fishing.</li>
+                                <li><strong>Northeast:</strong> Iroquois farmers, longhouses.</li>
+                                <li><strong>Mississippi Valley:</strong> Cahokia, large trade networks.</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="key-point">
+                    <h4>2. European Motives & Tech</h4>
+                    <ul>
+                        <li><strong>Motives:</strong> Wealth (Asian trade), national glory, spread Christianity.</li>
+                        <li><strong>Maritime Tech:</strong> Astrolabe, caravels, lateen sails.</li>
+                    </ul>
+                </div>
+                
+                <div class="key-point">
+                    <h4>3. Columbus & Columbian Exchange (1492+)</h4>
+                    <ul>
+                        <li><strong>Columbus:</strong> Spanish-funded, 1492 voyage.</li>
+                        <li><strong>Exchange:</strong>
+                            <ul class="nested-list">
+                                <li><strong>Americas → Europe:</strong> Maize, potatoes, tomatoes.</li>
+                                <li><strong>Europe → Americas:</strong> Wheat, horses, cattle, smallpox (devastated Natives).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="key-point">
+                    <h4>4. Spanish Colonial Systems</h4>
+                    <ul>
+                        <li><strong>Encomienda System:</strong> Spanish crown granted Natives to colonists for forced labor.</li>
+                        <li><strong>African Labor:</strong> Replaced Natives in encomienda due to disease/death and resistance. Africans had more immunity and were less able to escape.</li>
+                        <li><strong>Casta System:</strong> Rigid, race-based social hierarchy (Peninsulares > Creoles > Mestizos > Mulattos > Africans/Natives).</li>
+                    </ul>
+                </div>
+                
+                <div class="key-point">
+                    <h4>5. Debates & Justifications</h4>
+                    <ul>
+                        <li><strong>Las Casas:</strong> Argued for Native humanity and rights.</li>
+                        <li><strong>Justifications for Slavery:</strong> Misuse of the "Curse of Ham" to claim Africans were destined for enslavement.</li>
+                    </ul>
+                </div>
+                
+                <div class="key-point">
+                    <h4>6. Economic Shift</h4>
+                    <ul>
+                        <li><strong>Joint-Stock Companies:</strong> Pooled investor money to fund colonies (reduced risk).</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <footer>
+        <p>APUSH Review Study Guide</p>
+    </footer>
+
+    <script>
+        function showPeriod(periodId) {
+            // Hide all period contents
+            document.querySelectorAll('.period-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            
+            // Show selected period content
+            document.getElementById(periodId).style.display = 'block';
+            
+            // Update active button
+            document.querySelectorAll('.period-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
